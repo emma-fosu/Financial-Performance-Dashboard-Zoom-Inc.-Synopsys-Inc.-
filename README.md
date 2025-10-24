@@ -132,14 +132,53 @@ To view the dashboard online, navigate to this [page](https://app.powerbi.com/gr
 📌 Next Steps
 
 ## Challenges I faced
-1. Data source: Different excel format and sheets
-2. Different tags names
-3. Extracting the year from the frames
-4. Testing for valid frames
-Mention how you could extend or improve the project.
+1. **Data source:** Initially, the proposal for the data source was to get all the available 10-K forms of both Zoom, Inc. and  Synopsys, Inc. into a folder then use power to select the necessary sheets and transform the data. But, both companies' financial statements have different sheets layout and names, different financial name for the same thing, different value formats and different table structure.  
+**Solution**: SEC EDGAR (Electronic Data Gathering, Analysis, and Retrieval) APIs.    
+It is a web-based interface provided by the U.S. Securities and Exchange Commission (SEC) that allows developers and analysts to programmatically access public company filings and financial data submitted to the SEC.   
+The company-concept API was used and it returns all the XBRL disclosures from a single company (CIK) and concept (a taxonomy and tag) into a single JSON file, with a separate array of facts for each units on measure that the company has chosen to disclose (e.g. net profits reported in U.S. dollars and in Canadian dollars).
+`https://data.sec.gov/api/xbrl/companyconcept/CIK[Company's CIK Number]/[Taxonomy]/[Tag].json`.  
+The JSON structures are updated throughout the day.
+2. **Tag Names Mismatch:** Because EDGAR allows companies to extend the service with their own tag names, there were some mismatches and errors when the same tag is used for both companies.  
+**Solution**: A tag dimension table was created to map different tage names to a single well-defined name. The tag table provided three alternatives for the same tag and in case the first tag fails, subsequent alternatives are used until there is a resolution. 
+<img src="./images/tags.png" />
+*For example, the `CostOfRevenue` has another tag `CostofGoodAndServicesSold`. If `CostOfRevenue` is not a recognized tag name for the company, `CostofGoodAndServicesSold` is used instead. If it also fails, then no data will be collected for such tag.*  
 
-Suggest deployment, real-time analysis, or dashboard enhancements.
+3. **Testing for valid frames:** Every EDGAR XBRL disclosures has a `frame` field that referst to the snapshot of a company's financial data for a specific reporting period or time frame. Eg. a frame with the value `CY2023Q4I` means Calender Year 2023, Quarter 4, Instant value. For only 10-K Forms, the frame values are different for each tag. To retrieve the right frame, each has to be tested to the right format or pattern. To do this, a regular expression pattern matching is needed but unfortunately, M language does not support it.   
+**Solution**: A workaround was done by executing a JavaScript code with the `RegExp` Object. M language support executing JS code with the `Web.Page` function.
+```fsharp
+    let 
+        regex_test = (regex as text, str as text, optional options as text) as logical => 
+        let
+            optionsActual = if options = null then "" else options,
+            script = "<script>
+                        regex = '"&regex&"';
+                        str = '"&str&"';
+                        options = '"&optionsActual&"';
+                        document.write(new RegExp(regex, options).test(str));
+                    </script>",
+            res = Web.Page(script){0}[Data]{0}[Children]{1}[Children]{0}[Text]
+        in
+            Logical.FromText(res)
+    in regex_test
+```
+*The code snippet of the `regex_test` function used to test for valid frames.*  
+4. **Extracting the year from the frames:** Similarly to testing for valid frames, the fiscal year for each tag was needed. Power Query M Language does not support extracting string with a regular expression pattern matching technique, so the same workaround for testing valid frames was used.    
+**Solution**: A `regex_search` function that used JavaScript code to search for the substring matching the provided pattern.
 
+```fsharp
+(regex as text, str as text, optional options as text) => 
+let
+    optionsActual = if options = null then "" else options,
+    script = "<script>
+                regex = '"&regex&"';
+                str = '"&str&"';
+                options = '"&optionsActual&"';
+                document.write(str.search(new RegExp(regex, options)));
+             </script>",
+    res = Web.Page(script){0}[Data]{0}[Children]{1}[Children]{0}[Text]
+in
+    res
+```
 ## 🔜 My Next Project
 
 ### Divvy Bike-Sharing Riding Pattern
