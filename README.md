@@ -2,34 +2,33 @@
 
 <img src="./images/dashboard.gif" aria-label="A gif showing the finacial dashboard" />
 
-## 📑 Table of Contents
+> To view and interact the dashboard click [here](https://app.powerbi.com/groups/me/reports/19c45587-ee7c-4119-ad00-436c31009fa8/01bd393a8b71a60ca994?experience=power-bi&bookmarkGuid=36654765797e8b09abe8).
+## Table of Contents
 
-- [🔎 Executive Summary](#-executive-summary)
-- [❓ Problem Statement](#-problem-statement)
-- [🎯 Objectives](#-objectives)
-- [📥 Data Sourcing](#-data-sourcing)
-- [🏗️ Data Model Formation](#-data-model-formation)
-- [🛠️ Skills & Tools Demonstrated](#️-skills--tools-demonstrated)
-- [📂 Project Workflow](#-project-workflow)
-- [📈 Key Results & Insights](#-key-results--insights)
-- [💡 What I Learned](#-what-i-learned)
-- [✅ Best Approach (My Perspective)](#-best-approach-my-perspective)
-- [🚀 How to Reproduce This Project](#-how-to-reproduce-this-project)
+- [Executive Summary](#executive-summary)
+- [Problem Statement](#problem-statement)
+- [Objectives](#objectives)
+- [Key Results & Insights](#key-results--insights)
+- [Skills & Tools Demonstrated](#skills--tools-demonstrated)
+- [Project Workflow](#project-workflow)
+- [What I Learned](#what-i-learned)
+- [Lessons Learned and Future Improvements](#lessons-learned-and-future-improvements)
+- [How to Setup This Project](#how-to-setup-this-project)
+- [Project Structure](#project-structure)
 - [Challenges I faced](#challenges-i-faced)
-- [📊 Project Structure](#-project-structure)
-- [📌 Next Steps](#-next-steps)
-- [🔜 My Next Project](#-my-next-project)
-- [🙋 About Me](#-about-me)
+- [My Next Project](#my-next-project)
+- [What to Learn Next](#what-to-learn-next)
+- [Contact Me](#contact-me)
 
-https://app.powerbi.com/groups/me/reports/19c45587-ee7c-4119-ad00-436c31009fa8/01bd393a8b71a60ca994?experience=power-bi&bookmarkGuid=36654765797e8b09abe8
 
-## 🔎 Executive Summary
+
+## Executive Summary
 
 Provide a concise summary of your project. Highlight the problem you solved, your methodology, and the key insights or results. Keep this section short but impactful to grab attention.
 
 ---
 
-## ❓ Problem Statement
+## Problem Statement
 
 Describe the business problem or analytical challenge that motivated the project. Make it relatable to real-world scenarios or industry needs.
 
@@ -38,19 +37,21 @@ Customer churn poses a significant risk to subscription-based businesses. Unders
 
 ---
 
-## 🎯 Objectives
+## Objectives
 
 - Clearly state what you set out to achieve.
 - Mention the analytical or business goals.
 
 ---
-## 📈 Key Results & Insights
+## Key Results & Insights
 
 - List 3–5 top findings from your analysis.
 - Present insights in clear, recruiter-friendly language.
 - Use visuals (charts, screenshots) if possible.
 
-## 🛠️ Skills & Tools Demonstrated
+## Recommendtions
+
+## Skills & Tools Demonstrated
 - Data extraction through REST APIs.
 - Ability interpret **SEC EDGAR API** documentation to identify the appropriate URL field and parameters such as the taxonomy and tags necessary for retrieving and preparing accurate data for analysis.
 - Data cleaning and transformation using Power Query (**M language**, **user-defined functions**, **column pivoting**, **API request and error handling** )
@@ -59,7 +60,7 @@ Customer churn poses a significant risk to subscription-based businesses. Unders
 - **Workflow Tools:** Power BI, Git/GitHub.
 
 
-## 📂 Project Workflow
+## Project Workflow
 ### 📥 Data Sourcing
 The data was sourced from the **SEC EDGAR (Electronic Data Gathering, Analysis, and Retrieval) API**. It is a web-based interface provided by the U.S Securities and Exchange Commission (SEC) that allows to programmatically access public company filings (10-K, 10-Q, 8-K, etc) and financial data submitted to the SEC. Read more about the [**EDGAR API.**](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)
 
@@ -164,26 +165,26 @@ Additionally, redundant columns were removed from the dataset to make it readabl
 
 9. The final step converted `val` to numeric form for accurate calculations pivoted the table so each financial metric (e.g., Assets, Liabilities, Revenue) becomes its own column and formatted fiscal_year as a date to support time-based analysis.
 
-```fsharp
-#"Changed val to number" =
-    Table.TransformColumnTypes(#"Removed Columns", {{"val", type number}}),
+    ```fsharp
+    #"Changed val to number" =
+        Table.TransformColumnTypes(#"Removed Columns", {{"val", type number}}),
 
-#"Pivoted Column" =
-    Table.Pivot(
-        #"Changed val to number",
-        List.Distinct(#"Changed val to number"[name]),
-        "name",
-        "val",
-        List.Sum
-    ),
+    #"Pivoted Column" =
+        Table.Pivot(
+            #"Changed val to number",
+            List.Distinct(#"Changed val to number"[name]),
+            "name",
+            "val",
+            List.Sum
+        ),
 
-#"Changed fiscal_year to text" =
-    Table.TransformColumnTypes(#"Pivoted Column", {{"fiscal_year", type text}}),
+    #"Changed fiscal_year to text" =
+        Table.TransformColumnTypes(#"Pivoted Column", {{"fiscal_year", type text}}),
 
-#"Changed fiscal_year to date" =
-    Table.TransformColumnTypes(#"Changed fiscal_year to text", {{"fiscal_year", type date}})
+    #"Changed fiscal_year to date" =
+        Table.TransformColumnTypes(#"Changed fiscal_year to text", {{"fiscal_year", type date}})
 
-```
+    ```
 
 ### Data Modeling
 #### Overview
@@ -290,17 +291,19 @@ This structure allows cross-analysis between financial performance and stock pri
 - **Key Relationships:**
   - `cik` provides a consistent linkage between company and both fact tables
   - Date tables (`Fiscal Year` and `Share Price Date`) ensure proper time-based slicing
-- **Use Case Examples:**
+- **Use Case Examples:**Lessons Learned and Future Improvements
   - Compare **EPS vs Share Price** over time
   - Analyze **Free Cash Flow** trends across fiscal years
   - Track **Company growth metrics** alongside market performance
 
 
 ### Data Visualization and Analysis
+After cleaning, transforming and modeling the dataset, it was analysed and visualized with **Microsoft Power BI**. Power BI offer rich visuals and features to easily analyse and visualize your data as well extended it to create new visuals that suit your story.
+Each Financial metric has a target or minimum value to be considered okay for the investor. All the Power BI visuals (line, bar, column chart, etc) used in this project show an indicator when the target or minimum value is.   
+Also, **Power BI's Bookmark** feature made it possible to stack different visual groups and view them one at a time according to the selected tab.
 
 
-
-## 💡 What I Learned
+## What I Learned
 
 1. Multiple tabs using Power BI bookmarks. The bookmark features allowed me to create a tab-like visual to change the view based on what tab (button) is selected.
 2. Creating new visuals in Power BI with **Deneb (Vega-Lite)** visual open the opportunity to create new stunning, customizable visual that are not available in Power BI. For example, the ROE, ROA, and Price-to-Boo Ratio KPIs used a new visual indicator created with Deneb visuals.
@@ -324,7 +327,7 @@ This structure allows cross-analysis between financial performance and stock pri
 5. Creating a field measure to define each company;s color. This makes it easy to customize the color showed when you change the company. This can also be used to create dark-light theme.  
    *A code snippet showing how the company color field measure was defined.*
 
-   ```sql
+   ```fsharp
     Company Color =
         SWITCH(
             [Selected Company],
@@ -333,7 +336,7 @@ This structure allows cross-analysis between financial performance and stock pri
         )
     ```
 
-## ✅ Lessons Learned and Future Improvements
+## Lessons Learned and Future Improvements
 
 1. **Code repetition and non-modularity**: When defining formatting measures for the tooltip and card visuals in DAX, I found myself using the same expressions and statements but with different arguments. This makes the code more complex, error-prone and will be difficult to change in the future.  
    **Improvements:** Power BI **DAX user-defined functions (UDFs)** let you create reusable parameterized DAX logic into your models. It is in preview now and will learn it to improve this and any future Power BI project.
@@ -342,7 +345,7 @@ This structure allows cross-analysis between financial performance and stock pri
 
 ---
 
-## 🚀 How to SetUp This Project
+## How to SetUp This Project
 
 There are two ways to setup this project.
 
@@ -357,7 +360,7 @@ There are two ways to setup this project.
    **NOTE**: You need to have Power BI installed locally to view this file.  
    To view the dashboard online, navigate to this [page](https://app.powerbi.com/groups/me/reports/19c45587-ee7c-4119-ad00-436c31009fa8/01bd393a8b71a60ca994?experience=power-bi&bookmarkGuid=36654765797e8b09abe8).
 
-## 📊 Project Structure
+## Project Structure
 
     ```bash
     ├── images/                          # Images used for README.md
@@ -416,7 +419,7 @@ There are two ways to setup this project.
         res
     ```
 
-## 🔜 My Next Project
+## My Next Project
 
 ### Divvy Bike-Sharing Riding Pattern
 
@@ -430,7 +433,7 @@ My next project will focus on determing consumer pattern for a bike-sharing comp
 4. DAX Time Intelligence functions.
 5. Deneb Visual (Vega-Lite).
 
-## 🙋 Contact Me
+## Contact Me
 
 🔗 LinkedIn: [www.linkedin.com/in/emma-fosu](www.linkedin.com/in/emma-fosu)
 
