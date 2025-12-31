@@ -1,10 +1,11 @@
-# 📊 Project Title – One-Line Description
+# Zoom vs Synopsys Financial Performance Analysis
 
 <img src="./images/dashboard.gif" aria-label="A gif showing the finacial dashboard" />
 
 > To view and interact the dashboard click [here](https://app.powerbi.com/groups/me/reports/19c45587-ee7c-4119-ad00-436c31009fa8/01bd393a8b71a60ca994?experience=power-bi&bookmarkGuid=36654765797e8b09abe8).
-## Table of Contents
 
+## Table of Contents
+- [Project Overview](#project-overview)
 - [Executive Summary](#executive-summary)
 - [Problem Statement](#problem-statement)
 - [Objectives](#objectives)
@@ -21,30 +22,23 @@
 - [Contact Me](#contact-me)
 
 
+## Project Overview
+This project analyzes and visualizes the financial performance of Zoom Video Communications and Synopsys to support investment decision-making. Using a comparative dashboard, the project examines revenue trends, profitability, and key performance indicators to highlight differences in business stability, growth potential, and risk profiles. The outcome is a clear, data-driven framework that helps investors assess relative strengths, trade-offs, and long-term value creation opportunities across both companies.
 
 ## Executive Summary
 
-Provide a concise summary of your project. Highlight the problem you solved, your methodology, and the key insights or results. Keep this section short but impactful to grab attention.
-
----
 
 ## Problem Statement
-
 Describe the business problem or analytical challenge that motivated the project. Make it relatable to real-world scenarios or industry needs.
 
 _Example:_  
 Customer churn poses a significant risk to subscription-based businesses. Understanding why customers leave and predicting who is at risk enables proactive retention strategies.
 
----
-
 ## Objectives
-
 - Clearly state what you set out to achieve.
 - Mention the analytical or business goals.
 
----
 ## Key Results & Insights
-
 - List 3–5 top findings from your analysis.
 - Present insights in clear, recruiter-friendly language.
 - Use visuals (charts, screenshots) if possible.
@@ -53,29 +47,29 @@ Customer churn poses a significant risk to subscription-based businesses. Unders
 
 ## Skills & Tools Demonstrated
 - Data extraction through REST APIs.
-- Ability interpret **SEC EDGAR API** documentation to identify the appropriate URL field and parameters such as the taxonomy and tags necessary for retrieving and preparing accurate data for analysis.
+- Ability to interpret **SEC EDGAR API** documentation to identify appropriate endpoints, URL field and parameters including taxonomies and tags required for retrieving and preparing accurate data for analysis.
 - Data cleaning and transformation using Power Query (**M language**, **user-defined functions**, **column pivoting**, **API request and error handling** )
-- Performed **data modeling** by defining relationships between tables, defining measures with **DAX**, creating hierarchies, and ensuring proper use of star schema design to enhance calculation accuracy and report performance.
-- Data visualization with built-in Power BI visuals and **custom KPI visuals** using **Deneb (vega-lite)**.
+- Performed **data modeling** by defining table relationships, creating measures using **DAX**, building hierarchies, and applying proper star schema design to improve calculation accuracy and report performance.
+- Data visualization using built-in Power BI visuals and **custom KPI visuals** with **Deneb (vega-lite)**.
 - **Workflow Tools:** Power BI, Git/GitHub.
 
 
 ## Project Workflow
 ### 📥 Data Sourcing
-The data was sourced from the **SEC EDGAR (Electronic Data Gathering, Analysis, and Retrieval) API**. It is a web-based interface provided by the U.S Securities and Exchange Commission (SEC) that allows to programmatically access public company filings (10-K, 10-Q, 8-K, etc) and financial data submitted to the SEC. Read more about the [**EDGAR API.**](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)
+The data was sourced from the **SEC EDGAR (Electronic Data Gathering, Analysis, and Retrieval) API**. It is a web-based interface provided by the U.S. Securities and Exchange Commission (SEC) that allows for programmatically accessing public company filings (10-K, 10-Q, 8-K, etc.) and financial data submitted to the SEC. Read more about the [**EDGAR API.**](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)
 
 The company-concept API was used to retrieve the XBRL disclosures from a single company (CIK) and concept (a taxonomy and tag) into a single JSON file.   
 
 API: `https://data.sec.gov/api/xbrl/companyconcept/CIK##########/{taxonomy}/{tag}.json`
 - `CIK##########` - represent the CIK number for a company. You can find the CIK number of a company [here.](https://www.sec.gov/search-filings/cik-lookup)
-- `taxonomy` - A taxonomy is a structured dictionary of financial reporting concepts defined by accounting standards like `us-gaap` or `ifrs`. Each taxonomy has it own standardized concepts (tags). For example: `us-gaap` has concepts such as  `Assets`, `Revenues`, `Liabilities`, etc.
+- `taxonomy` - A taxonomy is a structured dictionary of financial reporting concepts defined by accounting standards like `us-gaap` or `ifrs`. Each taxonomy has its own standardized concepts (tags). For example: `us-gaap` has concepts such as  `Assets`, `Revenues`, `Liabilities`, etc.
 - `tag` - is the individual data elements within a taxonomy.
     For example, under the us-gaap taxonomy, you might have tags like:
     - `us-gaap:Assets` — Total assets reported by the company
     - `us-gaap:Liabilities` — Total liabilities
     - `us-gaap:Revenues` — Reported revenues  
-To know the available taxonomy and tags from the financial statement, open any financial form in XBRL viewer and click on any highlight value to get the taxonomy and tag.
-An example of Zoom, Inc 10-K is provided [here](https://www.sec.gov/ix?doc=/Archives/edgar/data/0001585521/000158552125000042/zm-20250131.htm#fact-identifier-82).
+To know the available taxonomy and tags from the financial statement, open any financial form in the XBRL viewer and click on any highlighted value to get the taxonomy and tag.
+An example of Zoom, Inc. 10-K is provided [here](https://www.sec.gov/ix?doc=/Archives/edgar/data/0001585521/000158552125000042/zm-20250131.htm#fact-identifier-82).
 
     ```fsharp
         let
@@ -105,7 +99,7 @@ An example of Zoom, Inc 10-K is provided [here](https://www.sec.gov/ix?doc=/Arch
         #"Expanded tags" = Table.ExpandTableColumn(#"Added tags", "tags", {"tag", "name", "tag_1", "tag_2"}, {"tag", "name", "tag_1", "tag_2"})
     ```
 
-2. After building the company–tag mapping table, the next stage involved fetching financial data from an external API using each company’s cik and associated tag values.
+2. After building the company–tag mapping table, the next stage involved fetching financial data from an external API using each company’s CIK and associated tag values.
     ```fsharp
      #"Added fectched data" = Table.AddColumn(
                                     #"Expanded tags", 
@@ -126,27 +120,27 @@ An example of Zoom, Inc 10-K is provided [here](https://www.sec.gov/ix?doc=/Arch
 
     ```
 
-4. This step expanded the contents of the unified `USD_new` column to expose detailed financial information returned by the API. This produces a flat, structured table where each company and tag combination is linked with its corresponding financial `value`, `form type`, and `reporting frame` making the dataset ready for filtering and time-based analysis.
+4. This step expanded the contents of the unified `USD_new` column to expose detailed financial information returned by the API. This produces a flat, structured table where each company and tag combination is linked with its corresponding financial `value`, `form type`, and `reporting frame`, making the dataset ready for filtering and time-based analysis.
     ```fsharp
         #"Expanded USD_new" = Table.ExpandListColumn(#"Removed extra data", "USD_new"),
         #"Expanded USD_new1" = Table.ExpandRecordColumn(#"Expanded USD_new", "USD_new", {"val", "form", "frame"}, {"val", "form", "frame"}),
     ```
 
-5. Next, the dataset was filtered to include only annual financial filings (Form 10-K) and removes records without a valid reporting frame.
+5. Next, the dataset was filtered to include only annual financial filings (Form 10-K) and remove records without a valid reporting frame.
     ```fsharp
         #"Only 10-K Rows" = Table.SelectRows(
         #"Expanded USD_new1",
         each ([form] = "10-K") and ([frame] <> null)
     )
     ```
-6. After filtering out 10-K values, the dataset was validated and filtered keep only records with properly formatted reporting frames.
+6. After filtering out 10-K values, the dataset was validated and filtered to keep only records with properly formatted reporting frames.
 It adds a `valid_frame` column using a regular expression to identify entries like `CY2022` or `CY2022Q4I`, then filters out any invalid or missing frames — ensuring that only reliable annual and quarterly data remain for analysis.
     ```fsharp
-    "Added 'valid_frame'" = Table.AddColumn(#"Only 10-K Rows", "valid_frame", each regex_test("^(CY\\d{4}|CY\\d{4}Q(3|4)I)$", [frame])),
+    #"Added 'valid_frame'" = Table.AddColumn(#"Only 10-K Rows", "valid_frame", each regex_test("^(CY\\d{4}|CY\\d{4}Q(3|4)I)$", [frame])),
         #"Filtered Rows with valid frame" = Table.SelectRows(#"Added 'valid_frame'", each ([valid_frame] = true)),
     ```
 
-7. Next step extracted the fiscal year from each record’s frame (e.g., "CY2022" → 2022) and converts it to a numeric type.
+7. Next step extracted the fiscal year from each record’s frame (e.g., "CY2022" → 2022) and converted it to a numeric type.
 It standardizes the year format, making it easier to perform time-based analysis, establish relationships with a fiscal calendar table, and support year-over-year comparisons in Power BI.
     ```fsharp
     #"Extracted Year from 'frame'" = Table.AddColumn(#"Filtered Rows with valid frame", "fiscal_year", each Text.Middle([frame], 2, 4), type text),
@@ -163,7 +157,7 @@ Additionally, redundant columns were removed from the dataset to make it readabl
     #"Removed Columns" = Table.RemoveColumns(#"Filtered Row Not in Years Range",{"form", "frame", "valid_frame"}),
     ```
 
-9. The final step converted `val` to numeric form for accurate calculations pivoted the table so each financial metric (e.g., Assets, Liabilities, Revenue) becomes its own column and formatted fiscal_year as a date to support time-based analysis.
+9. The final step converted `val` to numeric form for accurate calculations, pivoted the table so each financial metric (e.g., Assets, Liabilities, Revenue) becomes its own column and formatted fiscal_year as a date to support time-based analysis.
 
     ```fsharp
     #"Changed val to number" =
