@@ -90,7 +90,7 @@ The project aims to:
 - **Synopsys commands a Premium Valuation justified by Earnings Stability while Zoom has sharply normalized from Extreme Highs to a Lower, Mature Valuation.** 
     Synopsys has consistently traded at a **premium P/E**, reflecting sustained investor confidence in its long-term earnings growth and strategic importance in the semiconductor and EDA ecosystem. Its valuation has remained relatively stable and elevated, indicating that the market expects continued, durable growth.  
 
-    <img src="./images/DE.png" alt="A chart showing the Debt-to-Equity Ratio of Zoom and Synopsys." />
+    <img src="./images/PE.png" alt="A chart showing the Price-to-Earnings Ratio of Zoom and Synopsys." />
 
     In contrast, Zoom’s P/E has been **highly volatile**, peaking at extreme levels around its IPO and during the pandemic due to rapid adoption and a low earnings base, then compressing sharply as growth normalized. Today, Zoom trades at a much lower, more mature valuation, signaling reduced growth expectations but improved earnings stability.
 
@@ -127,7 +127,7 @@ Investors should allocate capital to **Synopsys** as a **long-term holding**, su
 
 
 ## Project Workflow
-### 📥 Data Sourcing
+### Data Sourcing
 The data was sourced from the **SEC EDGAR (Electronic Data Gathering, Analysis, and Retrieval) API**. It is a web-based interface provided by the U.S. Securities and Exchange Commission (SEC) that allows for programmatically accessing public company filings (10-K, 10-Q, 8-K, etc.) and financial data submitted to the SEC. Read more about the [**EDGAR API.**](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)
 
 The company-concept API was used to retrieve the XBRL disclosures from a single company (CIK) and concept (a taxonomy and tag) into a single JSON file.   
@@ -257,7 +257,6 @@ Additionally, redundant columns were removed from the dataset to make it readabl
 This data model integrates **financial performance data** and **market share prices** to enable analysis of company fundamentals, valuation trends, and year-over-year performance.  
 It follows a **star schema** structure, combining fact tables (`revenues_fact`, `sharePrice_fact`) with related dimension tables (`company_dim`, `Fiscal Year`, `Share Price Date`).
 
----
 <img src="./images/semantic_model_disconnected.png" />
 
 *The star schema showing various tables and relationship formed.*
