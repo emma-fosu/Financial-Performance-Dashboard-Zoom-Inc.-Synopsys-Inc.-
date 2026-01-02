@@ -10,40 +10,111 @@
 - [Problem Statement](#problem-statement)
 - [Objectives](#objectives)
 - [Key Results & Insights](#key-results--insights)
+- [Conclusion](#conclusion)
 - [Skills & Tools Demonstrated](#skills--tools-demonstrated)
 - [Project Workflow](#project-workflow)
 - [What I Learned](#what-i-learned)
 - [Lessons Learned and Future Improvements](#lessons-learned-and-future-improvements)
 - [How to Setup This Project](#how-to-setup-this-project)
 - [Project Structure](#project-structure)
-- [Challenges I faced](#challenges-i-faced)
-- [My Next Project](#my-next-project)
-- [What to Learn Next](#what-to-learn-next)
 - [Contact Me](#contact-me)
 
 
 ## Project Overview
-This project analyzes and visualizes the financial performance of Zoom Video Communications and Synopsys to support investment decision-making. Using a comparative dashboard, the project examines revenue trends, profitability, and key performance indicators to highlight differences in business stability, growth potential, and risk profiles. The outcome is a clear, data-driven framework that helps investors assess relative strengths, trade-offs, and long-term value creation opportunities across both companies.
+This project analyses and visualises the financial performance of **Zoom Video Communications** and **Synopsys** to support informed investment decision-making. Using a comparative dashboard, the project examines revenue trends, profitability, and key performance indicators to highlight differences in business stability, growth potential, and risk profiles.
 
 ## Executive Summary
+Zoom exhibits strengths in liquidity and maintains a debt-free capital structure. However, its earnings, free cash flow, and valuation metrics are **highly volatile**, reflecting sensitivity to external shocks such as **post-pandemic demand normalization**. This volatility introduces uncertainty for long-term investors seeking predictable returns.
+
+Synopsys, in contrast, demonstrates **superior financial stability** across nearly all key metrics. It delivers consistent growth in net income, EPS, and free cash flow, maintains strong profitability efficiency, and commands a valuation premium supported by durable earnings and structural growth drivers. Its modest use of leverage further enhances returns without materially increasing risk.
 
 
 ## Problem Statement
-Describe the business problem or analytical challenge that motivated the project. Make it relatable to real-world scenarios or industry needs.
+Investment decision-making relies heavily on the accurate comparison of a company's financial performance using metrics derived from **SEC filings**, such as **income statements**, **balance sheets**, and **cash flow statements**. However, manually reviewing SEC filings across multiple companies is inefficient, time-consuming, and error-prone because each company files reports in different formats, reporting periods, and disclosure structures.
 
-_Example:_  
-Customer churn poses a significant risk to subscription-based businesses. Understanding why customers leave and predicting who is at risk enables proactive retention strategies.
+As the number of companies under review increases, the effort required to extract, normalise, and analyse financial data from individual SEC filings grows exponentially; hence, manual analysis quickly becomes outdated, as new filings are released quarterly and annually. This inefficiency limits timely insights, reduces analytical coverage, and constrains investors’ ability to respond promptly to changing financial conditions.
 
 ## Objectives
-- Clearly state what you set out to achieve.
-- Mention the analytical or business goals.
+The project aims to:
+
+1. Retrieve financial statement data directly from the **SEC API** in a structured and standardized format.
+2. Compute and compare key investment metrics (e.g., **margins**, **EPS**, **Free Cash Flow**) across multiple companies.
+3. Enable easy expansion to include additional companies without increasing manual effort.
+4. Automatically refresh analyses as new SEC filings are released, ensuring insights remain current.
+5. Support more informed, timely, and data-driven investment decisions.
 
 ## Key Results & Insights
-- List 3–5 top findings from your analysis.
-- Present insights in clear, recruiter-friendly language.
-- Use visuals (charts, screenshots) if possible.
+- **Synopsys Net Margin is Stable But Zoom's Volatility Introduces Uncertainty**   
+    Zoom and Synopsys both demonstrate strong profitability, with peak net income margins reaching approximately **30%**. However, Zoom’s net income margin is highly volatile. It peaked in **2021** and experienced a sharp decline the following year, reflecting its sensitivity to demand shocks and post-pandemic normalization.
 
-## Recommendtions
+    <img src="./images/NPM.png" alt="A chart showing the net profit margin of Zoom and Synopsys." />    
+
+    In contrast, Synopsys has recorded a **steady and consistent increase** in net income margin over the past five years, reaching its highest level in **2024**. This stability indicates stronger earnings resilience and operational discipline.
+
+- **Both Demonstrate Strong Cost Efficiency, though Synopsys shows Greater Consistency Over Time.**   
+    Both companies consistently maintain gross margins above the **70%** benchmark, indicating strong pricing power and operational efficiency but an exception occurred in 2020 when Zoom’s gross margin declined sharply from **82%** to **69%**. This drop can be attributed to the pandemic-driven surge in usage, particularly from free users for educational and social purposes, which significantly increased infrastructure and hosting costs, thereby raising COGS.
+
+    <img src="./images/GPM.png" alt="A chart showing the Gross profit margin of Zoom and Synopsys." /> 
+
+    Synopsys, by contrast, exhibited a steady upward trend in gross margin for several years, with only a modest decline from **81%** to **79%** in the most recent year.
+
+
+- **Synopsys offers Superior Investment Profitability and a more Reliable Earnings Record than Zoom.**   
+    Zoom’s EPS has been volatile, reaching its lowest point of **$0.34** in **2022**. Over the past eight years, Zoom’s EPS has not surpassed even the lowest EPS recorded by Synopsys during the same period.
+
+    <img src="./images/EPS.png" alt="A chart showing the Gross profit margin of Zoom and Synopsys." />
+
+    Synopsys has delivered consistent and robust EPS growth, peaking at **$14.50** in 2024. This reflects strong earnings quality and long-term value creation.
+
+- **Synopsys exhibits Strong and improving Cash-Generation Capability, while Zoom’s FCF is Poor.**  
+    Zoom’s free cash flow performance over the past eight years has been weak and **highly volatile**, with **negative FCF** recorded in alternating years on **three occasions**. This indicates instability in cash generation and weaker operating leverage.
+
+    <img src="./images/FCF.png" alt="A chart showing the Free Cash Flow of Zoom and Synopsys." />
+
+    Synopsys, on the other hand, has demonstrated strong and consistent FCF growth, reaching approximately **$2.6 billion** in **2024**, representing a **115%** year-over-year increase.
+
+- **Zoom has a stronger short-term liquidity position, though both firms are financially sound in this regard.**
+<img src="./images/QR.png" alt="A chart showing the Quick Ratio of Zoom and Synopsys." />
+<img src="./images/CR.png" alt="A chart showing the Current Ratio of Zoom and Synopsys." />
+
+Both companies maintain healthy liquidity positions, with quick ratios above 1 and current ratios above **1.5**. Zoom’s liquidity ratios are higher, indicating a greater capacity to meet short-term obligations.
+
+- **Both Firms have Conservative Capital Structures, with Zoom being virtually Debt-Free and Synopsys employing Modest Leverage efficiently.**   
+    Zoom recorded **negative debt-to-equity ratios** in its early years **(2017–2019)** due to negative shareholder equity. Since becoming a public company, Zoom has maintained a near-zero debt-to-equity ratio and is effectively debt-free, supported by a strong balance sheet.
+
+    <img src="./images/DE.png" alt="A chart showing the Debt-to-Equity Ratio of Zoom and Synopsys." />
+
+    Synopsys has consistently maintained a low but positive debt-to-equity ratio, typically ranging between **0.00** and **0.50**, reflecting prudent use of leverage without excessive financial risk.
+
+- **Synopsys commands a Premium Valuation justified by Earnings Stability while Zoom has sharply normalized from Extreme Highs to a Lower, Mature Valuation.**  
+    Synopsys has consistently traded at a **premium P/E**, reflecting sustained investor confidence in its long-term earnings growth and strategic importance in the semiconductor and EDA ecosystem. Its valuation has remained relatively stable and elevated, indicating that the market expects continued, durable growth.  
+
+    <img src="./images/DE.png" alt="A chart showing the Debt-to-Equity Ratio of Zoom and Synopsys." />
+
+    In contrast, Zoom’s P/E has been **highly volatile**, peaking at extreme levels around its IPO and during the pandemic due to rapid adoption and a low earnings base, then compressing sharply as growth normalized. Today, Zoom trades at a much lower, more mature valuation, signaling reduced growth expectations but improved earnings stability.
+
+- **Synopsys outperforms Zoom in Profitability Efficiency and Capital Utilization.**   
+    Zoom’s ROE and ROA are moderate, indicating reasonable profitability but weaker efficiency compared to high-performing technology peers.
+
+    <img src="./images/ROA.png" alt="A chart showing the Return-on-Asset of Zoom and Synopsys." />
+    <img src="./images/ROE.png" alt="A chart showing the Return-on-Equity of Zoom and Synopsys." />
+
+    Synopsys exhibits strong ROE and ROA relative to the broader software sector, demonstrating efficient utilization of both equity and assets to generate earnings.
+
+### Summary of Financial Performance of Zoom and Synopsys
+| Metric | Zoom Video Communications | Synopsys |
+|--------|---------------------------|----------| 
+|**Net Income Margin**|	High but volatile |	High and stable	Synopsys|
+| **Gross Profit Margin** |	Strong but volatile | Strong and consistent	|
+| **EPS** |	Volatile, low growth | Strong, steady growth |
+| **Free Cash Flow** |	Volatile, occasionally negative | Strong and growing |
+| **Liquidity Ratios** |	Very strong |	Strong |
+| **Debt-to-Equity** |	Near zero (debt-free) |	Low and stable |
+| **P/E** | Ratio	Low, volatile |	High, stable premium |
+| **ROE / ROA**	| Moderate	| Strong and efficient |
+
+## Conclusion
+Investors should allocate capital to **Synopsys** as a **long-term holding**, supported by its consistent earnings growth, strong cash-flow generation, and efficient capital utilization. Exposure to Zoom should be **limited or deferred** until the company demonstrates sustained **earnings stability** and **predictable cash-flow performance**.
 
 ## Skills & Tools Demonstrated
 - Data extraction through REST APIs.
@@ -274,8 +345,6 @@ The model consists of **two fact tables** connected through a **shared company d
 
 This structure allows cross-analysis between financial performance and stock price behavior.
 
----
-
 #### Model Design Notes
 
 - **Schema Type:** Star Schema  
@@ -412,20 +481,6 @@ There are two ways to setup this project.
     in
         res
     ```
-
-## My Next Project
-
-### Divvy Bike-Sharing Riding Pattern
-
-My next project will focus on determing consumer pattern for a bike-sharing company. The marketing team wants to understand how the two subscribers (casual and member) use the service. The team has proposed that converting more casuals into members will increase revenue significantly. This next project will aim at stating the riding patterns of casual and members and how to convert casual to member.
-
-## What to Learn Next
-
-1. DAX user-defined functions (UDFs).
-2. Visual Calulations.
-3. Calculation groups.
-4. DAX Time Intelligence functions.
-5. Deneb Visual (Vega-Lite).
 
 ## Contact Me
 
