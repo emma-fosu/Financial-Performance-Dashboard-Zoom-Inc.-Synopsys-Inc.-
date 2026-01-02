@@ -74,10 +74,11 @@ The project aims to:
     Synopsys, on the other hand, has demonstrated strong and consistent FCF growth, reaching approximately **$2.6 billion** in **2024**, representing a **115%** year-over-year increase.
 
 - **Zoom has a stronger short-term liquidity position, though both firms are financially sound in this regard.**
-<img src="./images/QR.png" alt="A chart showing the Quick Ratio of Zoom and Synopsys." />
-<img src="./images/CR.png" alt="A chart showing the Current Ratio of Zoom and Synopsys." />
 
-Both companies maintain healthy liquidity positions, with quick ratios above 1 and current ratios above **1.5**. Zoom’s liquidity ratios are higher, indicating a greater capacity to meet short-term obligations.
+    <img src="./images/QR.png" alt="A chart showing the Quick Ratio of Zoom and Synopsys." />
+    <img src="./images/CR.png" alt="A chart showing the Current Ratio of Zoom and Synopsys." />
+
+    Both companies maintain healthy liquidity positions, with quick ratios above 1 and current ratios above **1.5**. Zoom’s liquidity ratios are higher, indicating a greater capacity to meet short-term obligations.
 
 - **Both Firms have Conservative Capital Structures, with Zoom being virtually Debt-Free and Synopsys employing Modest Leverage efficiently.**   
     Zoom recorded **negative debt-to-equity ratios** in its early years **(2017–2019)** due to negative shareholder equity. Since becoming a public company, Zoom has maintained a near-zero debt-to-equity ratio and is effectively debt-free, supported by a strong balance sheet.
@@ -86,7 +87,7 @@ Both companies maintain healthy liquidity positions, with quick ratios above 1 a
 
     Synopsys has consistently maintained a low but positive debt-to-equity ratio, typically ranging between **0.00** and **0.50**, reflecting prudent use of leverage without excessive financial risk.
 
-- **Synopsys commands a Premium Valuation justified by Earnings Stability while Zoom has sharply normalized from Extreme Highs to a Lower, Mature Valuation.**  
+- **Synopsys commands a Premium Valuation justified by Earnings Stability while Zoom has sharply normalized from Extreme Highs to a Lower, Mature Valuation.** 
     Synopsys has consistently traded at a **premium P/E**, reflecting sustained investor confidence in its long-term earnings growth and strategic importance in the semiconductor and EDA ecosystem. Its valuation has remained relatively stable and elevated, indicating that the market expects continued, durable growth.  
 
     <img src="./images/DE.png" alt="A chart showing the Debt-to-Equity Ratio of Zoom and Synopsys." />
