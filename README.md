@@ -349,15 +349,15 @@ This structure allows cross-analysis between financial performance and stock pri
 
 - **Schema Type:** Star Schema  
 - **Granularity:**
-  - `revenues_fact`: One record per company per fiscal year
-  - `sharePrice_fact`: One record per company per trading date
+  - `revenues_fact`: One record per company per fiscal year.
+  - `sharePrice_fact`: One record per company per trading date.
 - **Key Relationships:**
-  - `cik` provides a consistent linkage between company and both fact tables
-  - Date tables (`Fiscal Year` and `Share Price Date`) ensure proper time-based slicing
-- **Use Case Examples:**Lessons Learned and Future Improvements
-  - Compare **EPS vs Share Price** over time
-  - Analyze **Free Cash Flow** trends across fiscal years
-  - Track **Company growth metrics** alongside market performance
+  - `cik` provides a consistent linkage between company and both fact tables.
+  - Date tables (`Fiscal Year` and `Share Price Date`) ensure proper time-based slicing.
+- **Use Case Examples:**
+  - Compare **EPS vs Share Price** over time.
+  - Analyze **Free Cash Flow** trends across fiscal years.
+  - Track **Company growth metrics** alongside market performance.
 
 
 ### Data Visualization and Analysis
@@ -486,6 +486,6 @@ There are two ways to setup this project.
 
 🔗 LinkedIn: [www.linkedin.com/in/emma-fosu](www.linkedin.com/in/emma-fosu)
 
-🔗 Portfolio: []()
+🔗 Portfolio: [emmanuelfosu.com](https://emma-fosu.github.io/portfolio-website/)
 
 🔗 Email: [emmanuelfosu.duffour@gmail.com](mailto:emmanuelfosu.duffour@gmail.com)`
